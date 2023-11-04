@@ -13,3 +13,9 @@ try:
 finally:
     GPIO.cleanup()
 ```
+
+
+Oscilloscope
+```cmd
+sudo apt-get install libopenblas-base
+```
