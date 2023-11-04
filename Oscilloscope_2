@@ -1,0 +1,46 @@
+import RPi.GPIO as GPIO
+import time
+import matplotlib.pyplot as plt
+import math
+
+# Set the GPIO mode
+GPIO.setmode(GPIO.BCM)
+
+# Configure the GPIO pin for input
+channel = 17
+GPIO.setup(channel, GPIO.IN)
+
+# Create empty lists for storing data
+time_data = []
+signal_data = []
+
+# Set the time period and duration for data collection
+sample_rate = 1000  # 1000 samples per second
+duration = 5  # Collect data for 5 seconds
+
+# Create a sine wave for demonstration
+frequency = 1.0  # Frequency of the sine wave in Hz
+amplitude = 1.0  # Amplitude of the sine wave
+
+# Main data collection loop
+start_time = time.time()
+while (time.time() - start_time) < duration:
+    time_data.append(time.time() - start_time)
+    
+    # Generate a sine wave signal
+    sine_value = amplitude * math.sin(2 * math.pi * frequency * time_data[-1])
+    signal_data.append(sine_value)
+    
+    time.sleep(1 / sample_rate)
+
+# Clean up GPIO
+GPIO.cleanup()
+
+# Plot the collected data
+plt.plot(time_data, signal_data)
+plt.xlabel('Time (s)')
+plt.ylabel('Signal Level')
+plt.title('Raspberry Pi Oscilloscope with Sine Wave')
+plt.grid(True)
+plt.show()
+
