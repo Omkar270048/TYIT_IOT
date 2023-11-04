@@ -17,5 +17,9 @@ finally:
 
 Oscilloscope
 ```cmd
+pip install numpy
+```
+
+```cmd
 sudo apt-get install libopenblas-base
 ```
